@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Graphic } from "./Graphic";
+import { useData } from "./hooks/useData";
+import {modifyData} from "./hooks/modifyData"
 
-function App() {
+export const App = () => {
+  const data = useData();
+
+  if (!data) {
+    return <div>Retrieving data...</div>;
+  }
+  console.log(data)
+  const modifiedData = modifyData(data)
+  console.log(modifiedData[2000])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Graphic 
+        data={modifiedData} 
+        />
     </div>
   );
-}
-
-export default App;
+};
